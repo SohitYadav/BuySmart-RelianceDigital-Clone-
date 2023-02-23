@@ -1,12 +1,13 @@
 const express=require('express');
 const {connection}=require("./db");
+require('dotenv').config()
+//Route imports
+const {router}=require('./routes/product.route')
 const app=express();
 
 app.use(express.json());
 
-app.get("/",(req,res)=>{
-    res.send("Home Page")
-})
+app.use("/api/v1",router);
 
 
 
