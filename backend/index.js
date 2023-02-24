@@ -1,14 +1,22 @@
 const express=require('express');
 const {connection}=require("./db");
+const {authenticate}=require('./middleware/auth');
+const { cartRouter } = require('./routes/cart.route');
+const {router}=require('./routes/product.route')
+const {userRouter}=require('./routes/user.route')
+const cors=require('cors')
+// const {}
 require('dotenv').config()
 //Route imports
-const {router}=require('./routes/product.route')
+
 const app=express();
-
+app.use(cors());
 app.use(express.json());
-
-app.use("/api/v1",router);
-
+ 
+app.use("/users",userRouter);
+app.use("/products",router);
+// app.use(authenticate)
+app.use("/cart",cartRouter)
 
 
 app.listen(3200,async (req,res)=>{

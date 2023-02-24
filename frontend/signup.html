@@ -660,28 +660,24 @@
         
             <p id="regtext">Register New Account</p>
 
-        
+
 
     
-    <form id="form">
-        <input class="reg" type="text" name="firstname" id="firstname" placeholder="First Name*" size="60"/> 
-        <br>
-        <input class="reg" type="text" name="lastname" id="lastname" placeholder="Last Name*" size="60"/>
-        <br>
+    <div id="form">
+        <input class="reg" type="text" name="name" id="name" placeholder="Name*" size="60"/> 
+        <br>        
         <input class="reg" type="text" name="email"  id="email" placeholder="Email Address*" size="60"/>
         <br>
-        <input class="ema" type="submit" value="VERIFY EMAIL"/>
-        <br>
+        
         <input class="reg" type="password" name="password" id="password" placeholder="Password*" size="60"/>
+        <br>       
+        <input class="reg" type="text" name="mobile" id="phone" placeholder="Mobile Number*" size="60"/>
         <br>
-        <input class="reg" type="password" name="confirmpassword" id="confirm" placeholder="Confirm Password*" size="60"/>
-        <br> 
-        <input class="reg" type="text" name="mobile" id="mobile" placeholder="Mobile Number*" size="60"/>
-        <br>
-        <input  class="but" type="submit" value="REGISTER" size="100"/>
+        <!-- <input  class="but" type="submit" onclick="signUp()" value="REGISTER" size="100"/> -->
+        <button class="but" onclick="signUp()" >Register</button>
         <br>
         <p id="already">Already registered? &nbsp<a style="text-decoration: none; color: #e4252a;" href="login.html"> Login</a> </p>
-    </form>
+    </div>
     </div>
     <br><br><br>
 
@@ -763,5 +759,32 @@
         </div>
       </footer>
 </body>
+
+
+<script>
+
+function signUp(){
+    const data={
+        name:document.getElementById("name").value,
+        email:document.getElementById("email").value,        
+        password:document.getElementById("password").value,
+        phone:document.getElementById("phone").value        
+    }
+    fetch("http://localhost:3200/users/register",{
+        method:"POST",
+        headers:{
+            "Content-type":"application/json"
+        },
+        body:JSON.stringify(data)
+    } )
+    .then(res=>res.json())
+    .then(res=>console.log(res))
+    .catch(err=>console.log(err))
+}
+
+
+</script>
+
+
 
 </html>
