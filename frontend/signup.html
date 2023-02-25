@@ -664,14 +664,14 @@
 
     
     <div id="form">
-        <input class="reg" type="text" name="name" id="name" placeholder="Name*" size="60"/> 
+        <input class="reg" type="text" name="name" id="name" placeholder="Name*" size="60" required/> 
         <br>        
-        <input class="reg" type="text" name="email"  id="email" placeholder="Email Address*" size="60"/>
+        <input class="reg" type="text" name="email"  id="email" placeholder="Email Address*" size="60" required/>
         <br>
         
-        <input class="reg" type="password" name="password" id="password" placeholder="Password*" size="60"/>
+        <input class="reg" type="password" name="password" id="password" placeholder="Password*" size="60" required/>
         <br>       
-        <input class="reg" type="text" name="mobile" id="phone" placeholder="Mobile Number*" size="60"/>
+        <input class="reg" type="text" name="mobile" id="phone" placeholder="Mobile Number*" size="60" required/>
         <br>
         <!-- <input  class="but" type="submit" onclick="signUp()" value="REGISTER" size="100"/> -->
         <button class="but" onclick="signUp()" >Register</button>
@@ -778,7 +778,10 @@ function signUp(){
         body:JSON.stringify(data)
     } )
     .then(res=>res.json())
-    .then(res=>console.log(res))
+    .then((res)=>{
+      console.log(res);
+      alert("User Registered Successfully");
+    })
     .catch(err=>console.log(err))
 }
 

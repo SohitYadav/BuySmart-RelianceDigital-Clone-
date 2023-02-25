@@ -2,7 +2,7 @@ const express=require('express');
 const {connection}=require("./db");
 const {authenticate}=require('./middleware/auth');
 const { cartRouter } = require('./routes/cart.route');
-const {router}=require('./routes/product.route')
+const {productRouter}=require('./routes/product.route')
 const {userRouter}=require('./routes/user.route')
 const cors=require('cors')
 // const {}
@@ -14,7 +14,7 @@ app.use(cors());
 app.use(express.json());
  
 app.use("/users",userRouter);
-app.use("/products",router);
+app.use("/products",productRouter);
 // app.use(authenticate)
 app.use("/cart",cartRouter)
 

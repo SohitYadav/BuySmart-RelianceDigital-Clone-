@@ -15,6 +15,15 @@
     <link rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
   />
+  <style>
+    #logoutbtn{
+      background-color: #E4252A;
+      color: white;
+      border: none;
+      margin-right: 10px;
+      font-size: 14px;
+    }
+  </style>
 </head>
 <body>
     
@@ -45,15 +54,14 @@
           <i class="fa fa-search fa-lg" aria-hidden="true"></i>
         </button>
       </div>
-      <div>
-        <a href="#"
-          ><span><i class="fa fa-map-marker"></i></span>Select your
-          location</a
-        >
+      <div id="logout">
+        
+          <span id="username" style="color: white;"></span>
+        
         <a href="cart.html" class="saperator"
           ><span><i class="fa fa-shopping-cart"></i></span>Cart</a
         >
-        <a href="login.html"
+        <a id="loginuser" href="login.html"
           ><span><i class="fas fa-user-alt"></i></span>Login</a
         >
       </div>
@@ -975,4 +983,36 @@
 
 </body>
 <script src="./scripts/slider.js"></script>
+<script>
+  let username=document.getElementById("username")
+  let token=localStorage.getItem("token");
+  let loginuser=document.getElementById("loginuser");
+  if(token){
+    fetch("http://localhost:3200/users/alluser")
+    .then(res=>res.json())
+    .then((res)=>{
+      console.log(res);
+        showuser(res[0].name)
+    })
+    .catch(err=>console.log(err))
+  }
+
+  function showuser(a){
+    let logout=document.getElementById("logout")
+    username.innerText= `Hi ${a}`
+    loginuser.innerText=""
+    let logbtn=document.createElement("button")
+    logbtn.innerText="Logout";
+    logbtn.setAttribute("id","logoutbtn")
+    logbtn.addEventListener("click",()=>{
+      localStorage.removeItem("token");
+      alert("Logout Successfull")
+      setTimeout(() => {
+        window.location.assign("login.html")
+      }, 500);
+    })
+
+    logout.append(logbtn)
+  }
+</script>
 </html>
