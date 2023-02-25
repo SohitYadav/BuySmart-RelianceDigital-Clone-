@@ -5,6 +5,19 @@ const jwt=require('jsonwebtoken');
 const bcrypt=require('bcrypt');
 require('dotenv').config();
 
+
+
+userRouter.get("/alluser",async (req,res)=>{
+    try{
+          const data=await userModel.find();
+          res.send(data);
+    }
+    catch(err){
+        res.send(err.message);
+    }
+})
+
+
 userRouter.post("/register",async (req,res)=>{
     const {name,email,password,phone}=req.body;
     try{

@@ -8,8 +8,8 @@ const cartSchema=mongoose.Schema({
    discount:{type:String,required:true},
    brand:{type:String,required:true},
    category:{type:String,required:true},
-   qty:{type:Number,required:true},
-   userID:{type:String,required:true},
+   qty:{type:Number,required:true,default:1},
+   
 })
 
 const cartModel=mongoose.model("cart",cartSchema);

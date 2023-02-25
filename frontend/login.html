@@ -628,7 +628,7 @@
       </nav>
 
 
-
+<button id="admin">Admin Login</button>
 
     <div id="container">
         
@@ -639,10 +639,10 @@
 
 <div id="form">
     
-    <input class="reg" type="text" name="email"  id="email" placeholder="Email Address*" size="60"/>
+    <input class="reg" type="text" name="email"  id="email" placeholder="Email Address*" size="60" required/>
     <br>
     
-    <input class="reg" type="password" name="password" id="password" placeholder="Password*" size="60"/>
+    <input class="reg" type="password" name="password" id="password" placeholder="Password*" size="60" required/>
     <br>
      
     <button class="but" onclick="Login()">Login</button>
@@ -746,8 +746,19 @@
             body:JSON.stringify(data)
         })
         .then(res=>res.json())
-        .then(res=>localStorage.setItem("token",res.token))
-        .catch(err=>console.log(err))
+        .then((res)=>{
+
+          localStorage.setItem("token",res.token)
+          alert("Login Successfull")
+          window.location.assign("index.html")
+        })
+        .catch((err)=>{
+          alert("Please check your password or email");
+        })
     }
+    let btnadmin=document.getElementById("admin");
+    btnadmin.addEventListener("click",()=>{
+      window.location.assign('adminlogin.html')
+    })
 </script>
 </html>

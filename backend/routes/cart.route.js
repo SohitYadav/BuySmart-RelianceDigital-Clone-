@@ -1,12 +1,18 @@
 const express=require('express');
 const cartRouter=express.Router();
 const {cartModel}=require("../models/cartmodel")
-const userModel=require("../models/usermodel")
+
+
+
+
 cartRouter.get("/",async (req,res)=>{
     // const userid=req.body.userID
     try{
-       const data=await cartModel.find();
-       res.send(data)
+       const cart=await cartModel.find();
+       return res.send({
+        status: "success",
+        data: cart,
+      });
     }catch(error){
         res.status(409).json({ message : error.message })
     }
@@ -26,22 +32,32 @@ cartRouter.post("/create",async (req,res)=>{
 
 cartRouter.delete("/delete/:id", async (req, res) => {
   const Id = req.params.id;
-  const prod=await cartModel.find({"_id":Id});
-  const user_id_in_prod=prod[0].userID;
-  const user_making_req=req.body.userID;
-  console.log(user_id_in_prod,user_making_req)
+  
   try {
-    if(user_id_in_prod!==user_making_req){
-      res.send({"msg":"you are not authorised to do this opration"})
-    }else{
-      await cartModel.findByIdAndDelete({ _id: Id });
+    
+      await cartModel.findByIdAndDelete({_id:Id});
       res.send(`Product data deleted with id : ${Id}`);
 
-    }
+    
   } catch (err) {
-    res.send("con not delete this items ");
+    res.send("cannot delete this item");
     console.log(err);
   }
   });
+
+  cartRouter.patch("/update/:id", async (req, res) => {
+    const Id = req.params.id;
+    const payload=req.body;
+    try {
+      
+        await cartModel.findByIdAndDelete({_id:Id},payload);
+        res.send(`Product data deleted with id : ${Id}`);
+  
+      
+    } catch (err) {
+      res.send("cannot delete this item");
+      console.log(err);
+    }
+    });
 
 module.exports={cartRouter}
