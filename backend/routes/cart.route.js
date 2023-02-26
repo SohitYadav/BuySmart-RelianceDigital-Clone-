@@ -33,11 +33,9 @@ cartRouter.post("/create",async (req,res)=>{
 cartRouter.delete("/delete/:id", async (req, res) => {
   const Id = req.params.id;
   
-  try {
-    
+  try {    
       await cartModel.findByIdAndDelete({_id:Id});
       res.send(`Product data deleted with id : ${Id}`);
-
     
   } catch (err) {
     res.send("cannot delete this item");
@@ -50,8 +48,11 @@ cartRouter.delete("/delete/:id", async (req, res) => {
     const payload=req.body;
     try {
       
-        await cartModel.findByIdAndDelete({_id:Id},payload);
-        res.send(`Product data deleted with id : ${Id}`);
+       let cart= await cartModel.findByIdAndDelete({_id:Id},payload);
+        return res.send({
+          status: "success",
+          data: cart,
+        });
   
       
     } catch (err) {

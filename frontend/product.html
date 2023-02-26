@@ -77,6 +77,7 @@
       color :white;
       border: 1px solid #003380;
       width: 100px;
+      cursor: pointer;
       height: 25px;
     }
     #product-container>div {
@@ -85,6 +86,107 @@
       text-align: center;
       
     }
+    .searchbar {
+    font-size: 14px;
+    font-family: arial, sans-serif;
+    color: #202124;
+    display: flex;
+    z-index: 3;
+    height: 44px;
+    background: white;
+    border: 1px solid #dfe1e5;
+    box-shadow: none;
+    border-radius: 24px;
+    /* margin: 0 auto; */
+    margin-top: 5px;
+    width: 300px;
+    /* max-width: 224px; */
+  }
+  
+  .searchbar:hover {
+    box-shadow: 0 1px 6px rgb(32 33 36 / 28%);
+    border-color: rgba(223,225,229,0);
+  }
+  
+  .searchbar-wrapper {
+    flex: 1;
+    display: flex;
+    padding: 5px 8px 0 14px;
+  }
+  
+  .searchbar-left {
+    font-size: 14px;
+    font-family: arial, sans-serif;
+    color: #202124;
+    display: flex;
+    align-items: center;
+    padding-right: 13px;
+    margin-top: -5px;
+  }
+  
+  .search-icon-wrapper {
+    margin: auto;
+  }
+  
+  .search-icon {
+    margin-top: 3px;
+    color: #9aa0a6;
+    height: 20px;
+    line-height: 20px;
+    width: 20px;
+  }
+  
+  .searchbar-icon {
+    display: inline-block;
+    fill: currentColor;
+    height: 24px;
+    line-height: 24px;
+    position: relative;
+    width: 24px;
+  }
+  
+  .searchbar-center {
+    display: flex;
+    flex: 1;
+    flex-wrap: wrap;
+  }
+  
+  .searchbar-input-spacer {
+    color: transparent;
+    flex: 100%;
+    white-space: pre;
+    height: 34px;
+    font-size: 16px;
+  }
+  
+  .searchbar-input {
+    background-color: transparent;
+    border: none;
+    margin: 0;
+    padding: 0;
+    color: rgba(0, 0, 0, .87);
+    word-wrap: break-word;
+    outline: none;
+    display: flex;
+    flex: 100%;
+    margin-top: -37px;
+    height: 34px;
+    font-size: 16px;
+    max-width: 100%;
+    width: 100%;
+  }
+  
+  .searchbar-right {
+    display: flex;
+    flex: 0 0 auto;
+    margin-top: -5px;
+    align-items: stretch;
+    flex-direction: row
+  }
+  
+  .searchbar-clear-icon {
+    margin-right: 12px
+  }
 
     #product-container>div:hover {
       background-color: rgb(209, 187, 187);
@@ -117,14 +219,38 @@
         /></a>        
       </div>
       <div>
-        <input
-          type="search"
+        <!-- <input
+          type="search" id="brandsearch"
           id="storeSearch"
           placeholder="Find your favourite products"
-        />
-        <button id="search">
-          <i class="fa fa-search fa-lg" aria-hidden="true"></i>
-        </button>
+        /> -->
+
+        <div class="searchbar">
+          <div class="searchbar-wrapper">
+              <div class="searchbar-left">
+                  <div class="search-icon-wrapper">
+                      <span class="search-icon searchbar-icon">
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                              <path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z">
+                              </path>
+                          </svg>
+                      </span>
+                  </div>
+              </div>
+      
+              <div class="searchbar-center">
+                  <div class="searchbar-input-spacer"></div>
+      
+                  <input id="brandsearch" type="text" class="searchbar-input" maxlength="2048" name="q" autocapitalize="off" autocomplete="off" title="Search" role="combobox" placeholder="Search for products">
+              </div>
+      
+             
+          </div>
+      </div>
+
+
+
+       
       </div>
       <div id="logout">
         
@@ -769,13 +895,17 @@
   let btntab=document.getElementById("tab");
   let product=document.getElementById("product-container")
   function getData(){
-    fetch("http://localhost:3200/products",{
+    fetch("https://charming-fedora-goat.cyclic.app/products",{
         headers:{
             "Authorization":localStorage.getItem("token")
         }
     })
     .then(res=>res.json())
-    .then(res=>display(res))
+    .then((res)=>{
+      localStorage.setItem("searchdata",JSON.stringify (res))
+      display(res)
+    }
+      )
     .catch(err=>console.log(err))
 }
 getData();
@@ -790,15 +920,15 @@ getData();
         name.innerText = elem.name
         let brand = document.createElement("h2")
         brand.innerText = elem.brand
-        let price = document.createElement("h3")
-        price.innerText = elem.price
+        let price = document.createElement("p")
+        price.innerText =  `₹ ${elem.price} `
         
         let cat = document.createElement("p");
         cat.innerText = elem.category
         let btn = document.createElement("button")
         btn.innerText = "Add To Cart"
         btn.addEventListener("click", function () {
-          fetch("http://localhost:3200/cart/create",{
+          fetch("https://charming-fedora-goat.cyclic.app/cart/create",{
             method:"POST",
             headers:{
                 "Content-type":"application/json"
@@ -822,7 +952,7 @@ getData();
 
 
   btn1.addEventListener("click",()=>{
-    fetch("http://localhost:3200/products/desc")
+    fetch("https://charming-fedora-goat.cyclic.app/products/desc")
     .then(res=>res.json())
     .then((res)=>{
       display(res)
@@ -832,7 +962,7 @@ getData();
   })
 
   btn2.addEventListener("click",()=>{
-    fetch("http://localhost:3200/products/asc")
+    fetch("https://charming-fedora-goat.cyclic.app/products/asc")
     .then(res=>res.json())
     .then((res)=>{
       display(res)
@@ -841,7 +971,7 @@ getData();
     
   })
   btnlap.addEventListener("click",()=>{
-    fetch("http://localhost:3200/products/lap")
+    fetch("https://charming-fedora-goat.cyclic.app/products/lap")
     .then(res=>res.json())
     .then((res)=>{
       display(res)
@@ -850,7 +980,7 @@ getData();
   })
 
   btntv.addEventListener("click",()=>{
-    fetch("http://localhost:3200/products/tv")
+    fetch("https://charming-fedora-goat.cyclic.app/products/tv")
     .then(res=>res.json())
     .then((res)=>{
       display(res)
@@ -859,7 +989,7 @@ getData();
   })
 
   btntab.addEventListener("click",()=>{
-    fetch("http://localhost:3200/products/tab")
+    fetch("https://charming-fedora-goat.cyclic.app/products/tab")
     .then(res=>res.json())
     .then((res)=>{
       display(res)
@@ -875,7 +1005,7 @@ getData();
   let token=localStorage.getItem("token");
   let loginuser=document.getElementById("loginuser");
   if(token){
-    fetch("http://localhost:3200/users/alluser")
+    fetch("https://charming-fedora-goat.cyclic.app/users/alluser")
     .then(res=>res.json())
     .then((res)=>{
       console.log(res);
@@ -901,5 +1031,13 @@ getData();
 
     logout.append(logbtn)
   }
+  document.getElementById("brandsearch").addEventListener("input", (e) => {
+      let input = e.target.value;
+      let fetcheddata=JSON.parse (localStorage.getItem("searchdata"))
+      let newData = fetcheddata.filter((el, index) => {
+        return el.brand.toLowerCase().includes(input);
+      });
+      display(newData);
+    });
 </script>
 </html>

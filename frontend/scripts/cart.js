@@ -27,7 +27,7 @@ let totalprice=document.getElementById("totalprice");
 
 
 function cartData(){
-          fetch("http://localhost:3200/cart")
+          fetch("https://charming-fedora-goat.cyclic.app/cart")
           .then(res=>res.json())
           .then((res)=>{
             showData(res.data);
@@ -39,20 +39,7 @@ function cartData(){
 cartData()
 function showData(cart){
     card1.innerHTML=null;
-    let sum=0; 
-    for(let i=0;i<cart.length;i++){
-        sum=sum+cart[i].price*cart[i].qty
-    }
     
-    
-    itemprice.innerText="₹"+ sum;
-    let disc=-Math.floor(sum*0.4);
-    
-    discountprice.innerText= disc;
-
-discprice.innerText=  "₹" +(-disc ) 
-
-pricequant.innerText=`${cart.length} items`
 
 cart.forEach((el,index)=>{
     
@@ -85,6 +72,10 @@ incbtn.addEventListener("click",()=>{
     el.qty=Number(el.qty)+1
 
 quanttext.innerText=el.qty
+let temp=el.qty
+// console.log(temp);
+localStorage.setItem("tempquant",temp);
+
 
 })
 let quanttext=document.createElement("span")
@@ -113,7 +104,7 @@ remove.innerText="Remove";
 remove.setAttribute("class","addbtn")
 remove.addEventListener("click",()=>{
     
-fetch("http://localhost:3200/cart/delete/:id")
+fetch("https://charming-fedora-goat.cyclic.app/cart/delete/:id")
 .then(res=>res.json())
 .then(res=>console.log(res))
 .catch(err=>console.log(err))
@@ -128,9 +119,26 @@ fetch("http://localhost:3200/cart/delete/:id")
 
 let hr=document.createElement("hr");
 hr.setAttribute("id","hrline")
+// let temp=localStorage.getItem("tempquant")
+let sum=0; 
+    for(let i=0;i<cart.length;i++){
+        sum=sum+cart[i].price*cart[i].qty
+    }
+    
 
+    
+    itemprice.innerText="₹"+ sum;
+    let disc=-Math.floor(sum*0.4);
+    
+    discountprice.innerText= disc;
+
+discprice.innerText=  "₹" +(-disc ) 
+
+pricequant.innerText=`${cart.length} items`
 
 totalprice.innerText=`₹${sum+disc+40}` ;
+let totalpricee=`${sum+disc+40}`
+localStorage.setItem("totalprice", (totalpricee))
 
  
 cardimg.append(image,incbtn,quanttext,decbtn)
@@ -148,12 +156,13 @@ card1.append(card)
 
 
 let placeorder1=document.getElementById("placeorder1")
+
 placeorder1.addEventListener("click",()=>{
     let token=localStorage.getItem("token");
     if(!token){
         alert("Please Login")
     }else{
-        
+       window.location.assign("order.html") 
     }
     
 })
