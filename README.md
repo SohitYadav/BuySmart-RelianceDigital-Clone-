@@ -1,7 +1,11 @@
 
+Project Overview:
+This project involves the creation of a clone of the Reliance Digital website. The aim of this endeavor is to replicate the essential features and functionalities of the official Reliance Digital website, providing users with a similar online shopping experience for electronic products and gadgets.
+
+
 <img  alt="Chargebee" src="https://i.pinimg.com/originals/b9/d0/66/b9d066786963a29b40925069f9613e92.png">
 
-Check it out [Netlify](https://gleaming-naiad-468b5d.netlify.app/)
+Check it out [Netlify](https://buysmartonlineshop.netlify.app/)
 
 <h3 align="left">Tech Stack:</h3>
 
