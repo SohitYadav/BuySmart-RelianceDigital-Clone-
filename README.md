@@ -1,7 +1,21 @@
 
-Project Overview:
+
+<h3 align="left">Project Overview:</h3>
 This project involves the creation of a clone of the Reliance Digital website. The aim of this endeavor is to replicate the essential features and functionalities of the official Reliance Digital website, providing users with a similar online shopping experience for electronic products and gadgets.
 
+
+<h3 align="left">Features:</h3>
+Product Catalog: Our clone includes a wide range of electronic products and gadgets, just like the official Reliance Digital website. Users can browse and search for products based on categories and brands.
+
+User Registration and Authentication: Users can create accounts, log in, and manage their profiles. Authentication is handled securely to protect user data.
+
+Shopping Cart: Users can add products to their shopping cart, view their cart, and proceed to checkout for purchasing.
+
+Product Details: Detailed product pages include product descriptions, specifications, prices, and images.
+
+Search Functionality: Users can search for specific products using keywords and filters.
+
+Responsive Design: The clone is designed to be responsive and accessible on various devices, including desktops, tablets, and mobile phones.
 
 <img  alt="Chargebee" src="https://i.pinimg.com/originals/b9/d0/66/b9d066786963a29b40925069f9613e92.png">
 
