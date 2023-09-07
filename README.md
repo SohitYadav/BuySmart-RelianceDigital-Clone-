@@ -20,7 +20,7 @@ Search Functionality: Users can search for specific products using keywords and 
 Responsive Design: The clone is designed to be responsive and accessible on various devices, including desktops, tablets, and mobile phones.
 
 <h3 align="left">Demo:</h3>
-Check it out [Netlify](https://buysmartonlineshop.netlify.app/)
+Check it out [Netlify](https://saasnet.netlify.app/)
 
 <h3 align="left">Tech Stack:</h3>
 
