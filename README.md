@@ -1,3 +1,4 @@
+<img  alt="Chargebee" src="https://i.pinimg.com/originals/b9/d0/66/b9d066786963a29b40925069f9613e92.png">
 
 
 <h3 align="left">Project Overview:</h3>
@@ -18,8 +19,7 @@ Search Functionality: Users can search for specific products using keywords and 
 
 Responsive Design: The clone is designed to be responsive and accessible on various devices, including desktops, tablets, and mobile phones.
 
-<img  alt="Chargebee" src="https://i.pinimg.com/originals/b9/d0/66/b9d066786963a29b40925069f9613e92.png">
-
+<h3 align="left">Demo:</h3>
 Check it out [Netlify](https://buysmartonlineshop.netlify.app/)
 
 <h3 align="left">Tech Stack:</h3>
