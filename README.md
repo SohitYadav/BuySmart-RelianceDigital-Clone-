@@ -7,7 +7,8 @@ This project involves the creation of a clone of the Reliance Digital website. T
 <h3 align="left">Features:</h3>
 Product Catalog: Our clone includes a wide range of electronic products and gadgets, just like the official Reliance Digital website. Users can browse and search for products based on categories and brands.
 
-User Registration and Authentication: Users can create accounts, log in, and manage their profiles. Authentication is handled securely to protect user data.
+
+User Registration and Authentication: Users can create accounts and log in. Authentication is handled securely to protect user data.
 
 Shopping Cart: Users can add products to their shopping cart, view their cart, and proceed to checkout for purchasing.
 
